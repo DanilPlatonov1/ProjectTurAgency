@@ -1,6 +1,10 @@
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Logging;
 using ProjectTurAgency.Repositories;
 using ProjectTurAgency.Repositories.Implementations;
+using Serilog;
 using Unity;
+using Unity.Microsoft.Logging;
 
 namespace ProjectTurAgency
 {
@@ -22,6 +26,8 @@ namespace ProjectTurAgency
         {
             var container = new UnityContainer();
 
+            container.AddExtension(new LoggingExtension(CreateLoggerFactory()));
+
             container.RegisterType<IClientRepository, ClientRepository>();
             container.RegisterType<IContractRepository, ContractRepository>();
             container.RegisterType<IContractSigningRepository, ContractSigningRepository>();
@@ -30,7 +36,21 @@ namespace ProjectTurAgency
             container.RegisterType<ITourCompilationRepository, TourCompilationRepository>();
             container.RegisterType<ITourRepository, TourRepository>();
 
+            container.RegisterType<IConnectionString, ConnectionString>();
+
             return container;
+        }
+
+        private static LoggerFactory CreateLoggerFactory()
+        {
+            var loggerFactory = new LoggerFactory();
+            loggerFactory.AddSerilog(new LoggerConfiguration()
+             .ReadFrom.Configuration(new ConfigurationBuilder()
+              .SetBasePath(Directory.GetCurrentDirectory())
+              .AddJsonFile("appsettings.json")
+              .Build())
+             .CreateLogger());
+            return loggerFactory;
         }
     }
 }
