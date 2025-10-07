@@ -47,19 +47,9 @@
             panel1.Name = "panel1";
             panel1.Size = new Size(150, 450);
             panel1.TabIndex = 0;
-            // 
-            // button3
-            // 
-            button3.Location = new Point(30, 200);
-            button3.Name = "button3";
-            button3.Size = new Size(93, 57);
-            button3.TabIndex = 2;
-            button3.Text = "Удалить";
-            button3.UseVisualStyleBackColor = true;
-            button1.Click += ButtonDel_Click;
-            // 
-            // button1
-            // 
+            //
+            // button1 — Добавить
+            //
             button1.Location = new Point(30, 35);
             button1.Name = "button1";
             button1.Size = new Size(93, 57);
@@ -67,16 +57,26 @@
             button1.Text = "Добавить";
             button1.UseVisualStyleBackColor = true;
             button1.Click += ButtonAdd_Click;
-            // 
-            // button2
-            // 
+            //
+            // button2 — Изменить
+            //
             button2.Location = new Point(30, 118);
             button2.Name = "button2";
             button2.Size = new Size(93, 57);
             button2.TabIndex = 1;
             button2.Text = "Изменить";
             button2.UseVisualStyleBackColor = true;
-            button1.Click += ButtonUpd_Click;
+            button2.Click += ButtonUpd_Click;
+            //
+            // button3 — Удалить
+            //
+            button3.Location = new Point(30, 200);
+            button3.Name = "button3";
+            button3.Size = new Size(93, 57);
+            button3.TabIndex = 2;
+            button3.Text = "Удалить";
+            button3.UseVisualStyleBackColor = true;
+            button3.Click += ButtonDel_Click;
             // 
             // dataGridViewData
             // 
@@ -84,6 +84,7 @@
             dataGridViewData.AllowUserToDeleteRows = false;
             dataGridViewData.AllowUserToResizeColumns = false;
             dataGridViewData.AllowUserToResizeRows = false;
+            dataGridViewData.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dataGridViewData.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridViewData.Dock = DockStyle.Fill;
             dataGridViewData.Location = new Point(0, 0);

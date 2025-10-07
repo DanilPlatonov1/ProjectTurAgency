@@ -37,7 +37,6 @@
             скидкиToolStripMenuItem1 = new ToolStripMenuItem();
             операцииToolStripMenuItem = new ToolStripMenuItem();
             подпиасниеДоговораToolStripMenuItem = new ToolStripMenuItem();
-            компиляцияТураToolStripMenuItem = new ToolStripMenuItem();
             отчетыToolStripMenuItem = new ToolStripMenuItem();
             menuStrip1.SuspendLayout();
             SuspendLayout();
@@ -63,39 +62,39 @@
             клиентыToolStripMenuItem.Name = "клиентыToolStripMenuItem";
             клиентыToolStripMenuItem.Size = new Size(136, 22);
             клиентыToolStripMenuItem.Text = "Клиенты";
-            клиентыToolStripMenuItem.Click += new EventHandler(this.ClientsToolStripMenuItem_Click);
+            клиентыToolStripMenuItem.Click += ClientsToolStripMenuItem_Click;
             // 
             // контрактыToolStripMenuItem
             // 
             контрактыToolStripMenuItem.Name = "контрактыToolStripMenuItem";
             контрактыToolStripMenuItem.Size = new Size(136, 22);
             контрактыToolStripMenuItem.Text = "Контракты";
-            контрактыToolStripMenuItem.Click += new EventHandler(this.ContractsToolStripMenuItem_Click);
+            контрактыToolStripMenuItem.Click += ContractsToolStripMenuItem_Click;
             // 
             // скидкиToolStripMenuItem
             // 
             скидкиToolStripMenuItem.Name = "скидкиToolStripMenuItem";
             скидкиToolStripMenuItem.Size = new Size(136, 22);
             скидкиToolStripMenuItem.Text = "Туры";
-            скидкиToolStripMenuItem.Click += new EventHandler(this.ToursToolStripMenuItem_Click);
+            скидкиToolStripMenuItem.Click += ToursToolStripMenuItem_Click;
             // 
             // маршрутыToolStripMenuItem
             // 
             маршрутыToolStripMenuItem.Name = "маршрутыToolStripMenuItem";
             маршрутыToolStripMenuItem.Size = new Size(136, 22);
             маршрутыToolStripMenuItem.Text = "Маршруты";
-            маршрутыToolStripMenuItem.Click += new EventHandler(this.RoutesToolStripMenuItem_Click);
+            маршрутыToolStripMenuItem.Click += RoutesToolStripMenuItem_Click;
             // 
             // скидкиToolStripMenuItem1
             // 
             скидкиToolStripMenuItem1.Name = "скидкиToolStripMenuItem1";
             скидкиToolStripMenuItem1.Size = new Size(136, 22);
             скидкиToolStripMenuItem1.Text = "Скидки";
-            скидкиToolStripMenuItem1.Click += new EventHandler(this.DiscountsToolStripMenuItem_Click);
+            скидкиToolStripMenuItem1.Click += DiscountsToolStripMenuItem_Click;
             // 
             // операцииToolStripMenuItem
             // 
-            операцииToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { подпиасниеДоговораToolStripMenuItem, компиляцияТураToolStripMenuItem });
+            операцииToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { подпиасниеДоговораToolStripMenuItem });
             операцииToolStripMenuItem.Name = "операцииToolStripMenuItem";
             операцииToolStripMenuItem.Size = new Size(75, 20);
             операцииToolStripMenuItem.Text = "Операции";
@@ -105,14 +104,7 @@
             подпиасниеДоговораToolStripMenuItem.Name = "подпиасниеДоговораToolStripMenuItem";
             подпиасниеДоговораToolStripMenuItem.Size = new Size(196, 22);
             подпиасниеДоговораToolStripMenuItem.Text = "Подпиасние договора";
-            подпиасниеДоговораToolStripMenuItem.Click += new EventHandler(this.ContractSigningsToolStripMenuItem_Click);
-            // 
-            // компиляцияТураToolStripMenuItem
-            // 
-            компиляцияТураToolStripMenuItem.Name = "компиляцияТураToolStripMenuItem";
-            компиляцияТураToolStripMenuItem.Size = new Size(196, 22);
-            компиляцияТураToolStripMenuItem.Text = "Компиляция тура";
-            компиляцияТураToolStripMenuItem.Click += new EventHandler(this.TourCompilationsToolStripMenuItem_Click);
+            подпиасниеДоговораToolStripMenuItem.Click += ContractSigningsToolStripMenuItem_Click;
             // 
             // отчетыToolStripMenuItem
             // 
@@ -151,6 +143,5 @@
         private ToolStripMenuItem маршрутыToolStripMenuItem;
         private ToolStripMenuItem скидкиToolStripMenuItem1;
         private ToolStripMenuItem подпиасниеДоговораToolStripMenuItem;
-        private ToolStripMenuItem компиляцияТураToolStripMenuItem;
     }
 }

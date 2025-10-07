@@ -56,7 +56,6 @@
             button3.TabIndex = 2;
             button3.Text = "Удалить";
             button3.UseVisualStyleBackColor = true;
-            button1.Click += ButtonDel_Click;
             // 
             // button2
             // 
@@ -66,7 +65,6 @@
             button2.TabIndex = 1;
             button2.Text = "Изменить";
             button2.UseVisualStyleBackColor = true;
-            button1.Click += ButtonUpd_Click;
             // 
             // button1
             // 
@@ -80,13 +78,19 @@
             // 
             // dataGridViewData
             // 
+            dataGridViewData.AllowUserToAddRows = false;
+            dataGridViewData.AllowUserToDeleteRows = false;
             dataGridViewData.AllowUserToResizeColumns = false;
             dataGridViewData.AllowUserToResizeRows = false;
+            dataGridViewData.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dataGridViewData.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridViewData.Dock = DockStyle.Fill;
             dataGridViewData.Location = new Point(0, 0);
             dataGridViewData.MultiSelect = false;
             dataGridViewData.Name = "dataGridViewData";
+            dataGridViewData.ReadOnly = true;
+            dataGridViewData.RowHeadersVisible = false;
+            dataGridViewData.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dataGridViewData.Size = new Size(650, 450);
             dataGridViewData.TabIndex = 1;
             // 
