@@ -110,5 +110,18 @@ namespace ProjectTurAgency
         {
 
         }
+
+        private void DirectoryReportToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                _container.Resolve<FormDirectoryReport>().ShowDialog();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Ошибка при загрузке подборок туров",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
     }
 }

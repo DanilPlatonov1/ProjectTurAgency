@@ -78,7 +78,6 @@ internal class WordBuilder
             )
         ));
 
-        // Заголовок 
         var tr = new TableRow();
         for (var j = 0; j < widths.Length; ++j)
         {
@@ -88,7 +87,6 @@ internal class WordBuilder
         }
         table.Append(tr);
 
-        // Данные 
         table.Append(data.Skip(1).Select(x => new TableRow(x.Select(y => new TableCell(new Paragraph(new Run(new Text(y))))))));
 
         _body.Append(table);

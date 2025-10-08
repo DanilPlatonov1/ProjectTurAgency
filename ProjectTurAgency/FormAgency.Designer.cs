@@ -38,6 +38,7 @@
             операцииToolStripMenuItem = new ToolStripMenuItem();
             подпиасниеДоговораToolStripMenuItem = new ToolStripMenuItem();
             отчетыToolStripMenuItem = new ToolStripMenuItem();
+            DirectoryReportToolStripMenuItem = new ToolStripMenuItem();
             menuStrip1.SuspendLayout();
             SuspendLayout();
             // 
@@ -108,9 +109,18 @@
             // 
             // отчетыToolStripMenuItem
             // 
+            отчетыToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { DirectoryReportToolStripMenuItem });
             отчетыToolStripMenuItem.Name = "отчетыToolStripMenuItem";
             отчетыToolStripMenuItem.Size = new Size(60, 20);
             отчетыToolStripMenuItem.Text = "Отчеты";
+            // 
+            // DirectoryReportToolStripMenuItem
+            // 
+            DirectoryReportToolStripMenuItem.Name = "DirectoryReportToolStripMenuItem";
+            DirectoryReportToolStripMenuItem.ShortcutKeys = Keys.Control | Keys.W;
+            DirectoryReportToolStripMenuItem.Size = new Size(280, 22);
+            DirectoryReportToolStripMenuItem.Text = "Документ со справочниками";
+            DirectoryReportToolStripMenuItem.Click += DirectoryReportToolStripMenuItem_Click;
             // 
             // FormAgency
             // 
@@ -143,5 +153,6 @@
         private ToolStripMenuItem маршрутыToolStripMenuItem;
         private ToolStripMenuItem скидкиToolStripMenuItem1;
         private ToolStripMenuItem подпиасниеДоговораToolStripMenuItem;
+        private ToolStripMenuItem DirectoryReportToolStripMenuItem;
     }
 }
