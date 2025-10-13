@@ -63,7 +63,7 @@ internal class DocReport
                 var tours = GetTours();
                 word.AddHeader("\nТуры");
                 if (tours.Count > 1)
-                    word.AddTable([1000, 4000, 2000, 2000], tours);
+                    word.AddTable([1000, 4000, 2000], tours);
                 else
                     word.AddParagraph("Данные о турах отсутствуют.");
             }
@@ -82,32 +82,52 @@ internal class DocReport
 
     private List<string[]> GetClients()
     {
-        return [
-            ["ФИО", "Пол", "Телефон", "Почта"],
-            .. _clientRepository
+        var clientsData = _clientRepository
             .ReadClients()
-            .Select(x => new string[] {x.FullName, x.ClientSex.ToString(), x.Phone, x.Email})
-        ];
+            .Select(x => new string[]
+            {
+            x.FullName,
+            x.ClientSex.ToString(),
+            x.Phone,
+            x.Email
+            })
+            .ToList();
+
+        clientsData.Insert(0, new string[] { "ФИО", "Пол", "Телефон", "Почта" });
+
+        return clientsData;
     }
 
     private List<string[]> GetRoutes()
     {
-        return [
-            ["Начальная точка", "Конечная точка", "Продолжительность"],
-            .. _routeRepository
+        var routesData = _routeRepository
             .ReadRoutes()
-            .Select(x => new string[] {x.StartPoint, x.EndPoint, x.DurationDays.ToString()})
-        ];
+            .Select(x => new string[]
+            {
+            x.StartPoint,
+            x.EndPoint,
+            x.DurationDays.ToString()
+            })
+            .ToList();
+
+        routesData.Insert(0, new string[] { "Начальная точка", "Конечная точка", "Продолжительность" });
+        return routesData;
     }
 
     private List<string[]> GetTours()
     {
-        return [
-            ["Название", "Цена", "Номер маршрута"],
-            .. _tourRepository
+        var toursData = _tourRepository
             .ReadTours()
-            .Select(x => new string[] {x.Name, x.Price.ToString(), x.RouteId.ToString()})
-        ];
+            .Select(x => new string[]
+            {
+            x.Name,
+            x.Price.ToString(),
+            x.RouteId.ToString()
+            })
+            .ToList();
+
+        toursData.Insert(0, new string[] { "Название", "Цена", "Номер маршрута" });
+        return toursData;
     }
 
 }

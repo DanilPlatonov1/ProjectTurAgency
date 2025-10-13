@@ -29,14 +29,12 @@ namespace ProjectTurAgency.Repositories.Implementations
             {
                 using var connection = new NpgsqlConnection(_connectionString.ConnectionString);
                 var queryInsert = @"
-                    INSERT INTO ContractSignings (ClientId, TourId, DiscountId, SigningDate)
-                    VALUES (@ClientId, @TourId, @DiscountId, @SigningDate);";
+                    INSERT INTO ContractSignings (ContractId, SigningDate)
+                    VALUES (@ContractId, @SigningDate);";
 
                 connection.Execute(queryInsert, new
                 {
-                    contractSigning.ClientId,
-                    contractSigning.TourId,
-                    contractSigning.DiscountId,
+                    contractSigning.ContractId,
                     contractSigning.SigningDate,
                 });
             }
@@ -50,11 +48,10 @@ namespace ProjectTurAgency.Repositories.Implementations
         public IEnumerable<ContractSigning> ReadContractSignings(
             DateTime? dateFrom = null,
             DateTime? dateTo = null,
-            int? clientId = null,
-            int? tourId = null)
+            int? contractId = null)
         {
             _logger.LogInformation("Получение записей о подписании контрактов с фильтрацией");
-            _logger.LogDebug("Параметры фильтра: {json}", JsonConvert.SerializeObject(new { dateFrom, dateTo, clientId, tourId }));
+            _logger.LogDebug("Параметры фильтра: {json}", JsonConvert.SerializeObject(new { dateFrom, dateTo, contractId }));
 
             try
             {
@@ -77,16 +74,10 @@ namespace ProjectTurAgency.Repositories.Implementations
                     parameters.Add("@dateTo", dateTo.Value);
                 }
 
-                if (clientId.HasValue)
+                if (contractId.HasValue)
                 {
-                    queryBuilder.Append(" AND ClientId = @clientId");
-                    parameters.Add("@clientId", clientId.Value);
-                }
-
-                if (tourId.HasValue)
-                {
-                    queryBuilder.Append(" AND TourId = @tourId");
-                    parameters.Add("@tourId", tourId.Value);
+                    queryBuilder.Append(" AND ContractId = @contractId");
+                    parameters.Add("@contractId", contractId.Value);
                 }
 
                 queryBuilder.Append(" ORDER BY SigningDate DESC;");

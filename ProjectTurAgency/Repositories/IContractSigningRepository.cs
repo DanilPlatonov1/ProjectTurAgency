@@ -9,6 +9,6 @@ namespace ProjectTurAgency.Repositories;
 
 public interface IContractSigningRepository
 {
-    IEnumerable<ContractSigning> ReadContractSignings(DateTime? dateFrom = null, DateTime? dateTo = null, int? clientId = null, int? tourId = null);
+    IEnumerable<ContractSigning> ReadContractSignings(DateTime? dateFrom = null, DateTime? dateTo = null, int? contractId = null);
     void CreateContractSigning(ContractSigning contractSigning);
 }

@@ -28,48 +28,23 @@
         /// </summary>
         private void InitializeComponent()
         {
-            label1 = new Label();
             label2 = new Label();
-            label3 = new Label();
             label4 = new Label();
-            numericUpDownClientId = new NumericUpDown();
             label6 = new Label();
-            numericUpDownTourId = new NumericUpDown();
-            numericUpDownDiscountId = new NumericUpDown();
-            dateTimePickerSigningDate = new DateTimePicker();
             buttonSave = new Button();
             buttonCancel = new Button();
-            ((System.ComponentModel.ISupportInitialize)numericUpDownClientId).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)numericUpDownTourId).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)numericUpDownDiscountId).BeginInit();
+            dateTimePickerSigningDate = new DateTimePicker();
+            comboBoxContracts = new ComboBox();
             SuspendLayout();
-            // 
-            // label1
-            // 
-            label1.AutoSize = true;
-            label1.Location = new Point(31, 36);
-            label1.Name = "label1";
-            label1.Size = new Size(63, 15);
-            label1.TabIndex = 0;
-            label1.Text = "Клиент ID:";
             // 
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new Point(31, 80);
+            label2.Location = new Point(31, 30);
             label2.Name = "label2";
-            label2.Size = new Size(43, 15);
+            label2.Size = new Size(60, 15);
             label2.TabIndex = 1;
-            label2.Text = "Тур ID:";
-            // 
-            // label3
-            // 
-            label3.AutoSize = true;
-            label3.Location = new Point(31, 126);
-            label3.Name = "label3";
-            label3.Size = new Size(63, 15);
-            label3.TabIndex = 2;
-            label3.Text = "Скидка ID:";
+            label2.Text = "Контракт:";
             // 
             // label4
             // 
@@ -79,46 +54,18 @@
             label4.Size = new Size(0, 15);
             label4.TabIndex = 3;
             // 
-            // numericUpDownClientId
-            // 
-            numericUpDownClientId.Location = new Point(150, 28);
-            numericUpDownClientId.Name = "numericUpDownClientId";
-            numericUpDownClientId.Size = new Size(155, 23);
-            numericUpDownClientId.TabIndex = 5;
-            // 
             // label6
             // 
             label6.AutoSize = true;
-            label6.Location = new Point(31, 171);
+            label6.Location = new Point(31, 72);
             label6.Name = "label6";
             label6.Size = new Size(35, 15);
             label6.TabIndex = 6;
             label6.Text = "Дата:";
             // 
-            // numericUpDownTourId
-            // 
-            numericUpDownTourId.Location = new Point(150, 72);
-            numericUpDownTourId.Name = "numericUpDownTourId";
-            numericUpDownTourId.Size = new Size(155, 23);
-            numericUpDownTourId.TabIndex = 7;
-            // 
-            // numericUpDownDiscountId
-            // 
-            numericUpDownDiscountId.Location = new Point(150, 118);
-            numericUpDownDiscountId.Name = "numericUpDownDiscountId";
-            numericUpDownDiscountId.Size = new Size(155, 23);
-            numericUpDownDiscountId.TabIndex = 8;
-            // 
-            // dateTimePickerSigningDate
-            // 
-            dateTimePickerSigningDate.Location = new Point(150, 163);
-            dateTimePickerSigningDate.Name = "dateTimePickerSigningDate";
-            dateTimePickerSigningDate.Size = new Size(155, 23);
-            dateTimePickerSigningDate.TabIndex = 10;
-            // 
             // buttonSave
             // 
-            buttonSave.Location = new Point(78, 263);
+            buttonSave.Location = new Point(175, 139);
             buttonSave.Name = "buttonSave";
             buttonSave.Size = new Size(75, 23);
             buttonSave.TabIndex = 11;
@@ -128,7 +75,7 @@
             // 
             // buttonCancel
             // 
-            buttonCancel.Location = new Point(193, 263);
+            buttonCancel.Location = new Point(290, 139);
             buttonCancel.Name = "buttonCancel";
             buttonCancel.Size = new Size(75, 23);
             buttonCancel.TabIndex = 12;
@@ -136,44 +83,48 @@
             buttonCancel.UseVisualStyleBackColor = true;
             buttonCancel.Click += buttonCancel_Click;
             // 
+            // dateTimePickerSigningDate
+            // 
+            dateTimePickerSigningDate.Enabled = false;
+            dateTimePickerSigningDate.Location = new Point(112, 66);
+            dateTimePickerSigningDate.Name = "dateTimePickerSigningDate";
+            dateTimePickerSigningDate.Size = new Size(387, 23);
+            dateTimePickerSigningDate.TabIndex = 10;
+            // 
+            // comboBoxContracts
+            // 
+            comboBoxContracts.FormattingEnabled = true;
+            comboBoxContracts.Location = new Point(112, 22);
+            comboBoxContracts.Name = "comboBoxContracts";
+            comboBoxContracts.Size = new Size(387, 23);
+            comboBoxContracts.TabIndex = 13;
+            // 
             // FormContractSigning
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(359, 322);
+            ClientSize = new Size(539, 195);
+            Controls.Add(comboBoxContracts);
             Controls.Add(buttonCancel);
             Controls.Add(buttonSave);
             Controls.Add(dateTimePickerSigningDate);
-            Controls.Add(numericUpDownDiscountId);
-            Controls.Add(numericUpDownTourId);
             Controls.Add(label6);
-            Controls.Add(numericUpDownClientId);
             Controls.Add(label4);
-            Controls.Add(label3);
             Controls.Add(label2);
-            Controls.Add(label1);
             Name = "FormContractSigning";
-            Text = "FormContractSigning";
+            Text = "Подписание контракта";
             Load += FormContractSigning_Load;
-            ((System.ComponentModel.ISupportInitialize)numericUpDownClientId).EndInit();
-            ((System.ComponentModel.ISupportInitialize)numericUpDownTourId).EndInit();
-            ((System.ComponentModel.ISupportInitialize)numericUpDownDiscountId).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
 
         #endregion
-
-        private Label label1;
         private Label label2;
-        private Label label3;
         private Label label4;
-        private NumericUpDown numericUpDownClientId;
         private Label label6;
-        private NumericUpDown numericUpDownTourId;
-        private NumericUpDown numericUpDownDiscountId;
-        private DateTimePicker dateTimePickerSigningDate;
         private Button buttonSave;
         private Button buttonCancel;
+        private DateTimePicker dateTimePickerSigningDate;
+        private ComboBox comboBoxContracts;
     }
 }
