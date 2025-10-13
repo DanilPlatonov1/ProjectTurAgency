@@ -32,19 +32,16 @@
             label2 = new Label();
             label3 = new Label();
             label4 = new Label();
-            label5 = new Label();
             numericUpDownClientId = new NumericUpDown();
             label6 = new Label();
             numericUpDownTourId = new NumericUpDown();
             numericUpDownDiscountId = new NumericUpDown();
-            numericUpDownFinalPrice = new NumericUpDown();
             dateTimePickerSigningDate = new DateTimePicker();
             buttonSave = new Button();
             buttonCancel = new Button();
             ((System.ComponentModel.ISupportInitialize)numericUpDownClientId).BeginInit();
             ((System.ComponentModel.ISupportInitialize)numericUpDownTourId).BeginInit();
             ((System.ComponentModel.ISupportInitialize)numericUpDownDiscountId).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)numericUpDownFinalPrice).BeginInit();
             SuspendLayout();
             // 
             // label1
@@ -82,15 +79,6 @@
             label4.Size = new Size(0, 15);
             label4.TabIndex = 3;
             // 
-            // label5
-            // 
-            label5.AutoSize = true;
-            label5.Location = new Point(31, 216);
-            label5.Name = "label5";
-            label5.Size = new Size(90, 15);
-            label5.TabIndex = 4;
-            label5.Text = "Итоговая цена:";
-            // 
             // numericUpDownClientId
             // 
             numericUpDownClientId.Location = new Point(150, 28);
@@ -121,13 +109,6 @@
             numericUpDownDiscountId.Size = new Size(155, 23);
             numericUpDownDiscountId.TabIndex = 8;
             // 
-            // numericUpDownFinalPrice
-            // 
-            numericUpDownFinalPrice.Location = new Point(150, 208);
-            numericUpDownFinalPrice.Name = "numericUpDownFinalPrice";
-            numericUpDownFinalPrice.Size = new Size(155, 23);
-            numericUpDownFinalPrice.TabIndex = 9;
-            // 
             // dateTimePickerSigningDate
             // 
             dateTimePickerSigningDate.Location = new Point(150, 163);
@@ -137,7 +118,7 @@
             // 
             // buttonSave
             // 
-            buttonSave.Location = new Point(79, 304);
+            buttonSave.Location = new Point(78, 263);
             buttonSave.Name = "buttonSave";
             buttonSave.Size = new Size(75, 23);
             buttonSave.TabIndex = 11;
@@ -147,7 +128,7 @@
             // 
             // buttonCancel
             // 
-            buttonCancel.Location = new Point(194, 304);
+            buttonCancel.Location = new Point(193, 263);
             buttonCancel.Name = "buttonCancel";
             buttonCancel.Size = new Size(75, 23);
             buttonCancel.TabIndex = 12;
@@ -159,16 +140,14 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(359, 371);
+            ClientSize = new Size(359, 322);
             Controls.Add(buttonCancel);
             Controls.Add(buttonSave);
             Controls.Add(dateTimePickerSigningDate);
-            Controls.Add(numericUpDownFinalPrice);
             Controls.Add(numericUpDownDiscountId);
             Controls.Add(numericUpDownTourId);
             Controls.Add(label6);
             Controls.Add(numericUpDownClientId);
-            Controls.Add(label5);
             Controls.Add(label4);
             Controls.Add(label3);
             Controls.Add(label2);
@@ -179,7 +158,6 @@
             ((System.ComponentModel.ISupportInitialize)numericUpDownClientId).EndInit();
             ((System.ComponentModel.ISupportInitialize)numericUpDownTourId).EndInit();
             ((System.ComponentModel.ISupportInitialize)numericUpDownDiscountId).EndInit();
-            ((System.ComponentModel.ISupportInitialize)numericUpDownFinalPrice).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -190,12 +168,10 @@
         private Label label2;
         private Label label3;
         private Label label4;
-        private Label label5;
         private NumericUpDown numericUpDownClientId;
         private Label label6;
         private NumericUpDown numericUpDownTourId;
         private NumericUpDown numericUpDownDiscountId;
-        private NumericUpDown numericUpDownFinalPrice;
         private DateTimePicker dateTimePickerSigningDate;
         private Button buttonSave;
         private Button buttonCancel;

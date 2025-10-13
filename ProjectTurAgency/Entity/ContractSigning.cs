@@ -9,16 +9,9 @@ public class ContractSigning
     public int? DiscountId { get; private set; }
 
     public DateTime SigningDate { get; private set; }
-    public double FinalPrice { get; private set; }
 
-    public static ContractSigning CreateOperation(int id, int clientId, int tourId, int? discountId, double tourPrice, double discountPercent = 0)
+    public static ContractSigning CreateOperation(int id, int clientId, int tourId, int? discountId, double discountPercent = 0)
     {
-        double finalPrice = tourPrice;
-        if (discountId.HasValue)
-        {
-            finalPrice = tourPrice - (tourPrice * discountPercent / 100);
-        }
-
         return new ContractSigning
         {
             Id = id,
@@ -26,7 +19,6 @@ public class ContractSigning
             TourId = tourId,
             DiscountId = discountId,
             SigningDate = DateTime.Now,
-            FinalPrice = finalPrice
         };
     }
 }

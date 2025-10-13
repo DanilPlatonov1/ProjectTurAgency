@@ -1,7 +1,5 @@
 ﻿using ProjectTurAgency.Entity;
 using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
 using Microsoft.Extensions.Logging;
 using Dapper;
 using Npgsql;

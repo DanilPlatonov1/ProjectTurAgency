@@ -81,7 +81,7 @@
             comboBoxClient.FormattingEnabled = true;
             comboBoxClient.Location = new Point(107, 22);
             comboBoxClient.Name = "comboBoxClient";
-            comboBoxClient.Size = new Size(121, 23);
+            comboBoxClient.Size = new Size(199, 23);
             comboBoxClient.TabIndex = 4;
             // 
             // comboBoxTour
@@ -89,7 +89,7 @@
             comboBoxTour.FormattingEnabled = true;
             comboBoxTour.Location = new Point(107, 64);
             comboBoxTour.Name = "comboBoxTour";
-            comboBoxTour.Size = new Size(121, 23);
+            comboBoxTour.Size = new Size(199, 23);
             comboBoxTour.TabIndex = 5;
             // 
             // comboBoxDiscount
@@ -97,19 +97,19 @@
             comboBoxDiscount.FormattingEnabled = true;
             comboBoxDiscount.Location = new Point(107, 106);
             comboBoxDiscount.Name = "comboBoxDiscount";
-            comboBoxDiscount.Size = new Size(121, 23);
+            comboBoxDiscount.Size = new Size(199, 23);
             comboBoxDiscount.TabIndex = 6;
             // 
             // dateTimePickerDate
             // 
             dateTimePickerDate.Location = new Point(107, 147);
             dateTimePickerDate.Name = "dateTimePickerDate";
-            dateTimePickerDate.Size = new Size(120, 23);
+            dateTimePickerDate.Size = new Size(199, 23);
             dateTimePickerDate.TabIndex = 7;
             // 
             // buttonSave
             // 
-            buttonSave.Location = new Point(62, 225);
+            buttonSave.Location = new Point(79, 226);
             buttonSave.Name = "buttonSave";
             buttonSave.Size = new Size(75, 23);
             buttonSave.TabIndex = 8;
@@ -119,7 +119,7 @@
             // 
             // buttonCancel
             // 
-            buttonCancel.Location = new Point(171, 225);
+            buttonCancel.Location = new Point(188, 226);
             buttonCancel.Name = "buttonCancel";
             buttonCancel.Size = new Size(75, 23);
             buttonCancel.TabIndex = 9;
@@ -131,7 +131,7 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(301, 301);
+            ClientSize = new Size(339, 301);
             Controls.Add(buttonCancel);
             Controls.Add(buttonSave);
             Controls.Add(dateTimePickerDate);

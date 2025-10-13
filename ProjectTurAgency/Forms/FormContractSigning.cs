@@ -25,7 +25,6 @@ namespace ProjectTurAgency.Forms
                     numericUpDownTourId.Value = signing.TourId;
                     numericUpDownDiscountId.Value = signing.DiscountId ?? 0;
                     dateTimePickerSigningDate.Value = signing.SigningDate;
-                    numericUpDownFinalPrice.Value = (decimal)signing.FinalPrice;
 
                     _contractSigningId = value;
                 }
@@ -50,9 +49,8 @@ namespace ProjectTurAgency.Forms
                     _contractSigningId ?? 0,
                     (int)numericUpDownClientId.Value,
                     (int)numericUpDownTourId.Value,
-                    numericUpDownDiscountId.Value == 0 ? null : (int?)numericUpDownDiscountId.Value,
-                    (double)numericUpDownFinalPrice.Value
-                );
+                    numericUpDownDiscountId.Value == 0 ? null : (int?)numericUpDownDiscountId.Value
+                    );
 
                 _contractSigningRepository.CreateContractSigning(entity);
                 Close();

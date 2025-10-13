@@ -29,8 +29,8 @@ namespace ProjectTurAgency.Repositories.Implementations
             {
                 using var connection = new NpgsqlConnection(_connectionString.ConnectionString);
                 var queryInsert = @"
-                    INSERT INTO ContractSignings (ClientId, TourId, DiscountId, SigningDate, FinalPrice)
-                    VALUES (@ClientId, @TourId, @DiscountId, @SigningDate, @FinalPrice);";
+                    INSERT INTO ContractSignings (ClientId, TourId, DiscountId, SigningDate)
+                    VALUES (@ClientId, @TourId, @DiscountId, @SigningDate);";
 
                 connection.Execute(queryInsert, new
                 {
@@ -38,7 +38,6 @@ namespace ProjectTurAgency.Repositories.Implementations
                     contractSigning.TourId,
                     contractSigning.DiscountId,
                     contractSigning.SigningDate,
-                    contractSigning.FinalPrice
                 });
             }
             catch (Exception ex)
