@@ -1,7 +1,4 @@
-﻿using ProjectTurAgency.Entity;
-using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
+﻿using Newtonsoft.Json;
 using Microsoft.Extensions.Logging;
 using Dapper;
 using Npgsql;
@@ -28,14 +25,15 @@ namespace ProjectTurAgency.Repositories.Implementations
             {
                 using var connection = new NpgsqlConnection(_connectionString.ConnectionString);
                 var queryInsert = @"
-                    INSERT INTO Routes (StartPoint, EndPoint, DurationDays)
-                    VALUES (@StartPoint, @EndPoint, @DurationDays);";
+            INSERT INTO Routes (StartPoint, EndPoint, DurationDays, Attractions)
+            VALUES (@StartPoint, @EndPoint, @DurationDays, @Attractions);";
 
                 connection.Execute(queryInsert, new
                 {
                     route.StartPoint,
                     route.EndPoint,
-                    route.DurationDays
+                    route.DurationDays,
+                    Attractions = (int)route.Attractions
                 });
             }
             catch (Exception ex)
@@ -54,18 +52,20 @@ namespace ProjectTurAgency.Repositories.Implementations
             {
                 using var connection = new NpgsqlConnection(_connectionString.ConnectionString);
                 var queryUpdate = @"
-                    UPDATE Routes
-                    SET StartPoint = @StartPoint,
-                        EndPoint = @EndPoint,
-                        DurationDays = @DurationDays
-                    WHERE Id = @Id;";
+            UPDATE Routes
+            SET StartPoint = @StartPoint,
+                EndPoint = @EndPoint,
+                DurationDays = @DurationDays,
+                Attractions = @Attractions
+            WHERE Id = @Id;";
 
                 connection.Execute(queryUpdate, new
                 {
                     route.Id,
                     route.StartPoint,
                     route.EndPoint,
-                    route.DurationDays
+                    route.DurationDays,
+                    Attractions = (int)route.Attractions
                 });
             }
             catch (Exception ex)
@@ -101,7 +101,7 @@ namespace ProjectTurAgency.Repositories.Implementations
             try
             {
                 using var connection = new NpgsqlConnection(_connectionString.ConnectionString);
-                var querySelect = "SELECT * FROM Routes WHERE Id = @id;";
+                var querySelect = "SELECT *, Attractions::int AS Attractions FROM Routes WHERE Id = @id;";
                 var route = connection.QueryFirstOrDefault<Route>(querySelect, new { id });
 
                 _logger.LogDebug("Найденный маршрут: {json}", JsonConvert.SerializeObject(route));
@@ -121,7 +121,7 @@ namespace ProjectTurAgency.Repositories.Implementations
             try
             {
                 using var connection = new NpgsqlConnection(_connectionString.ConnectionString);
-                var querySelect = "SELECT * FROM Routes;";
+                var querySelect = "SELECT *, Attractions::int AS Attractions FROM Routes;";
                 var routes = connection.Query<Route>(querySelect);
 
                 _logger.LogDebug("Полученные маршруты: {json}", JsonConvert.SerializeObject(routes));

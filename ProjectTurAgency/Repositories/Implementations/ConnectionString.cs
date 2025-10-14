@@ -2,5 +2,5 @@
 
 internal class ConnectionString : IConnectionString
 {
-    string IConnectionString.ConnectionString => "Host=localhost;Port=5432;Database=TurAgency;Username=postgres;Password=psql12";
+    string IConnectionString.ConnectionString => "Host=localhost;Port=5432;Database=TourAgency;Username=postgres;Password=psql12";
 }
