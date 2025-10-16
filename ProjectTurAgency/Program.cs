@@ -35,7 +35,7 @@ namespace ProjectTurAgency
             container.RegisterType<IRouteRepository, RouteRepository>();
             container.RegisterType<ITourCompilationRepository, TourCompilationRepository>();
             container.RegisterType<ITourRepository, TourRepository>();
-
+            container.RegisterType<ITourRouteRepository, TourRouteRepository>();
             container.RegisterType<IConnectionString, ConnectionString>();
 
             return container;

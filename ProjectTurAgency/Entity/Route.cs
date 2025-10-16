@@ -19,4 +19,8 @@ public class Route
             Attractions = attractions
         };
     }
+    public override string ToString()
+    {
+        return $"{StartPoint}-{EndPoint}";
+    }
 }

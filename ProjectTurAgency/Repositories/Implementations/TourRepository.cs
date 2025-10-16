@@ -1,11 +1,10 @@
-﻿using ProjectTurAgency.Entity;
-using Dapper;
-using Newtonsoft.Json;
+﻿using Dapper;
 using Microsoft.Extensions.Logging;
 using Npgsql;
+using ProjectTurAgency.Entity;
 using System;
 using System.Collections.Generic;
-using System.Text;
+using System.Linq;
 
 namespace ProjectTurAgency.Repositories.Implementations
 {
@@ -20,138 +19,84 @@ namespace ProjectTurAgency.Repositories.Implementations
             _logger = logger;
         }
 
-        public void CreateTour(Tour tour)
+        public void CreateTour(Tour tour, IEnumerable<int> routeIds)
         {
-            _logger.LogInformation("Добавление тура");
-            _logger.LogDebug("Tours: {json}", JsonConvert.SerializeObject(tour));
+            using var connection = new NpgsqlConnection(_connectionString.ConnectionString);
+            connection.Open();
+            using var transaction = connection.BeginTransaction();
 
             try
             {
-                using var connection = new NpgsqlConnection(_connectionString.ConnectionString);
-                connection.Open();
+                // 1️⃣ Создаем тур
+                var tourId = connection.ExecuteScalar<int>(
+                    "INSERT INTO Tours (Name, Price) VALUES (@Name, @Price) RETURNING Id;",
+                    new { tour.Name, tour.Price }, transaction
+                );
 
-                var query = @"
-                    INSERT INTO Tours (Name, Price, RouteId)
-                    VALUES (@Name, @Price, @RouteId);";
+                // 2️⃣ Добавляем связи с маршрутами
+                const string insertLink = "INSERT INTO TourRoutes (TourId, RouteId) VALUES (@TourId, @RouteId);";
+                foreach (var routeId in routeIds)
+                    connection.Execute(insertLink, new { TourId = tourId, RouteId = routeId }, transaction);
 
-                connection.Execute(query, new
-                {
-                    tour.Name,
-                    tour.Price,
-                    tour.RouteId
-                });
-
-                _logger.LogInformation("Тур успешно добавлен: {name}", tour.Name);
+                transaction.Commit();
+                _logger.LogInformation("Тур создан с Id={tourId}", tourId);
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Ошибка при добавлении тура");
+                transaction.Rollback();
+                _logger.LogError(ex, "Ошибка при создании тура");
+                throw;
+            }
+        }
+
+        public void UpdateTour(Tour tour, IEnumerable<int> routeIds)
+        {
+            using var connection = new NpgsqlConnection(_connectionString.ConnectionString);
+            connection.Open();
+            using var transaction = connection.BeginTransaction();
+
+            try
+            {
+                // 1️⃣ Обновляем сам тур
+                const string updateTour = "UPDATE Tours SET Name=@Name, Price=@Price WHERE Id=@Id;";
+                connection.Execute(updateTour, new { tour.Id, tour.Name, tour.Price }, transaction);
+
+                // 2️⃣ Удаляем старые связи
+                const string deleteLinks = "DELETE FROM TourRoutes WHERE TourId=@TourId;";
+                connection.Execute(deleteLinks, new { TourId = tour.Id }, transaction);
+
+                // 3️⃣ Добавляем новые связи
+                const string insertLink = "INSERT INTO TourRoutes (TourId, RouteId) VALUES (@TourId, @RouteId);";
+                foreach (var routeId in routeIds)
+                    connection.Execute(insertLink, new { TourId = tour.Id, RouteId = routeId }, transaction);
+
+                transaction.Commit();
+                _logger.LogInformation("Тур (Id={tourId}) обновлен", tour.Id);
+            }
+            catch (Exception ex)
+            {
+                transaction.Rollback();
+                _logger.LogError(ex, "Ошибка при обновлении тура");
                 throw;
             }
         }
 
         public void DeleteTour(int id)
         {
-            _logger.LogInformation("Удаление тура");
-            _logger.LogDebug("Id: {id}", id);
-
-            try
-            {
-                using var connection = new NpgsqlConnection(_connectionString.ConnectionString);
-                connection.Open();
-
-                var query = "DELETE FROM Tours WHERE Id = @id;";
-                connection.Execute(query, new { id });
-
-                _logger.LogInformation("Тур успешно удалён (Id={id})", id);
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError(ex, "Ошибка при удалении тура");
-                throw;
-            }
+            using var connection = new NpgsqlConnection(_connectionString.ConnectionString);
+            connection.Execute("DELETE FROM Tours WHERE Id=@Id;", new { Id = id });
         }
 
         public Tour ReadTourById(int id)
         {
-            _logger.LogInformation("Чтение тура по Id");
-            _logger.LogDebug("Id: {id}", id);
-
-            try
-            {
-                using var connection = new NpgsqlConnection(_connectionString.ConnectionString);
-
-                var query = "SELECT Id, Name, Price, RouteId FROM Tours WHERE Id = @id;";
-                var tour = connection.QuerySingleOrDefault<Tour>(query, new { id });
-
-                if (tour == null)
-                {
-                    _logger.LogWarning("Тур с Id={id} не найден", id);
-                    return Tour.CreateEntity(0, string.Empty, 0, 0);
-                }
-
-                return tour;
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError(ex, "Ошибка при чтении тура по Id");
-                throw;
-            }
+            using var connection = new NpgsqlConnection(_connectionString.ConnectionString);
+            return connection.QuerySingleOrDefault<Tour>("SELECT Id, Name, Price FROM Tours WHERE Id=@Id;", new { Id = id });
         }
 
         public IEnumerable<Tour> ReadTours()
         {
-            _logger.LogInformation("Чтение списка туров");
-
-            try
-            {
-                using var connection = new NpgsqlConnection(_connectionString.ConnectionString);
-
-                var query = "SELECT Id, Name, Price, RouteId FROM Tours ORDER BY Id;";
-                var tours = connection.Query<Tour>(query);
-
-                _logger.LogDebug("Полученные туры: {json}", JsonConvert.SerializeObject(tours));
-                return tours;
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError(ex, "Ошибка при чтении туров");
-                throw;
-            }
-        }
-
-        public void UpdateTour(Tour tour)
-        {
-            _logger.LogInformation("Обновление данных тура");
-            _logger.LogDebug("Tours: {json}", JsonConvert.SerializeObject(tour));
-
-            try
-            {
-                using var connection = new NpgsqlConnection(_connectionString.ConnectionString);
-                connection.Open();
-
-                var query = @"
-                    UPDATE Tours
-                    SET Name = @Name,
-                        Price = @Price,
-                        RouteId = @RouteId
-                    WHERE Id = @Id;";
-
-                connection.Execute(query, new
-                {
-                    tour.Id,
-                    tour.Name,
-                    tour.Price,
-                    tour.RouteId
-                });
-
-                _logger.LogInformation("Тур (Id={id}) успешно обновлён", tour.Id);
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError(ex, "Ошибка при обновлении тура");
-                throw;
-            }
+            using var connection = new NpgsqlConnection(_connectionString.ConnectionString);
+            return connection.Query<Tour>("SELECT Id, Name, Price FROM Tours ORDER BY Id;");
         }
     }
 }

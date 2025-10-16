@@ -1,8 +1,5 @@
 ﻿using ProjectTurAgency.Entity;
 using ProjectTurAgency.Repositories;
-using System;
-using System.IO;
-using System.Windows.Forms;
 
 namespace ProjectTurAgency.Forms
 {

@@ -35,7 +35,7 @@
             label3 = new Label();
             label2 = new Label();
             label1 = new Label();
-            comboBoxRoute = new ComboBox();
+            checkedListBoxRoutes = new CheckedListBox();
             ((System.ComponentModel.ISupportInitialize)numericUpDownPrice).BeginInit();
             SuspendLayout();
             // 
@@ -50,7 +50,7 @@
             // 
             // buttonCancel
             // 
-            buttonCancel.Location = new Point(178, 227);
+            buttonCancel.Location = new Point(181, 277);
             buttonCancel.Name = "buttonCancel";
             buttonCancel.Size = new Size(75, 23);
             buttonCancel.TabIndex = 15;
@@ -60,7 +60,7 @@
             // 
             // buttonSave
             // 
-            buttonSave.Location = new Point(63, 227);
+            buttonSave.Location = new Point(66, 277);
             buttonSave.Name = "buttonSave";
             buttonSave.Size = new Size(75, 23);
             buttonSave.TabIndex = 14;
@@ -102,20 +102,20 @@
             label1.TabIndex = 9;
             label1.Text = "Название:";
             // 
-            // comboBoxRoute
+            // checkedListBoxRoutes
             // 
-            comboBoxRoute.FormattingEnabled = true;
-            comboBoxRoute.Location = new Point(140, 136);
-            comboBoxRoute.Name = "comboBoxRoute";
-            comboBoxRoute.Size = new Size(171, 23);
-            comboBoxRoute.TabIndex = 17;
+            checkedListBoxRoutes.FormattingEnabled = true;
+            checkedListBoxRoutes.Location = new Point(140, 137);
+            checkedListBoxRoutes.Name = "checkedListBoxRoutes";
+            checkedListBoxRoutes.Size = new Size(171, 94);
+            checkedListBoxRoutes.TabIndex = 18;
             // 
             // FormTour
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(341, 284);
-            Controls.Add(comboBoxRoute);
+            ClientSize = new Size(341, 331);
+            Controls.Add(checkedListBoxRoutes);
             Controls.Add(numericUpDownPrice);
             Controls.Add(buttonCancel);
             Controls.Add(buttonSave);
@@ -140,6 +140,6 @@
         private Label label3;
         private Label label2;
         private Label label1;
-        private ComboBox comboBoxRoute;
+        private CheckedListBox checkedListBoxRoutes;
     }
 }

@@ -65,6 +65,7 @@
             button2.TabIndex = 1;
             button2.Text = "Изменить";
             button2.UseVisualStyleBackColor = true;
+            button2.Click += ButtonUpd_Click;
             // 
             // button1
             // 

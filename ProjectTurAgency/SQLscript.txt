@@ -1,0 +1,73 @@
+-- Таблица клиентов
+CREATE TABLE Clients (
+    Id SERIAL PRIMARY KEY,
+    FullName VARCHAR(150) NOT NULL,
+    ClientSex INT NOT NULL,
+    Phone VARCHAR(30) NOT NULL,
+    Email VARCHAR(100) NOT NULL
+);
+
+-- Таблица скидок
+CREATE TABLE Discounts (
+    Id SERIAL PRIMARY KEY,
+    Description TEXT NOT NULL,
+    Percent DOUBLE PRECISION NOT NULL CHECK (Percent >= 0 AND Percent <= 100)
+);
+
+-- Таблица маршрутов
+CREATE TABLE Routes (
+    Id SERIAL PRIMARY KEY,
+    StartPoint VARCHAR(100) NOT NULL,
+    EndPoint VARCHAR(100) NOT NULL,
+    Attractions INT DEFAULT 0,
+    DurationDays INT NOT NULL CHECK (DurationDays > 0)
+);
+
+-- Таблица туров
+CREATE TABLE Tours (
+    Id SERIAL PRIMARY KEY,
+    Name VARCHAR(150) NOT NULL,
+    Price DOUBLE PRECISION NOT NULL CHECK (Price >= 0)
+);
+
+-- Таблица договоров
+CREATE TABLE Contracts (
+    Id SERIAL PRIMARY KEY,
+    ClientId INT NOT NULL,
+    TourId INT NOT NULL,
+    DiscountId INT,
+    Date DATE NOT NULL DEFAULT CURRENT_DATE,
+    FOREIGN KEY (ClientId) REFERENCES Clients (Id) ON DELETE CASCADE,
+    FOREIGN KEY (TourId) REFERENCES Tours (Id) ON DELETE CASCADE,
+    FOREIGN KEY (DiscountId) REFERENCES Discounts (Id) ON DELETE SET NULL
+);
+
+-- Таблица подписаний договоров
+CREATE TABLE ContractSignings (
+    Id SERIAL PRIMARY KEY,
+    ContractId INT NOT NULL,
+    SigningDate TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (ContractId) REFERENCES Contracts (Id) ON DELETE CASCADE
+);
+
+-- Таблица составления тура
+CREATE TABLE TourCompilations (
+    Id SERIAL PRIMARY KEY,
+    TourId INT NOT NULL,
+    CompilationDate TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (TourId) REFERENCES Tours (Id) ON DELETE CASCADE
+);
+
+-- Таблица элементов маршрута тура
+CREATE TABLE TourRoutes (
+    TourId INT NOT NULL REFERENCES Tours(Id) ON DELETE CASCADE,
+    RouteId INT NOT NULL REFERENCES Routes(Id) ON DELETE CASCADE,
+    PRIMARY KEY (TourId, RouteId)
+);
+
+CREATE TABLE TourRouteElements (
+    Id SERIAL PRIMARY KEY,
+    RouteId INT NOT NULL,
+    DayOrder INT NOT NULL CHECK (DayOrder > 0),
+    FOREIGN KEY (RouteId) REFERENCES Routes (Id) ON DELETE CASCADE
+);

@@ -63,7 +63,7 @@ internal class DocReport
                 var tours = GetTours();
                 word.AddHeader("\nТуры");
                 if (tours.Count > 1)
-                    word.AddTable([1000, 4000, 2000], tours);
+                    word.AddTable([1000, 4000], tours);
                 else
                     word.AddParagraph("Данные о турах отсутствуют.");
             }
@@ -121,12 +121,11 @@ internal class DocReport
             .Select(x => new string[]
             {
             x.Name,
-            x.Price.ToString(),
-            x.RouteId.ToString()
+            x.Price.ToString()
             })
             .ToList();
 
-        toursData.Insert(0, new string[] { "Название", "Цена", "Номер маршрута" });
+        toursData.Insert(0, new string[] { "Название", "Цена" });
         return toursData;
     }
 
